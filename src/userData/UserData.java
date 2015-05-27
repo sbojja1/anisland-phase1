@@ -12,7 +12,9 @@ public class UserData implements Serializable {
    private static final long serialVersionUID = 1L;
 
    
-   
+   private String vstrtyp;
+   private String title;
+   private String text1;
    private String cmpny;
    private String fnm;
    private String lnm;
@@ -48,6 +50,8 @@ public class UserData implements Serializable {
    private String vhno;
    private String parea;
    private String loc;
+   private String pov;
+   private String vcol;
    
 public String getCmpny() {
 	return cmpny;
@@ -259,5 +263,37 @@ public String getLoc() {
 public void setLoc(String loc) {
 	this.loc = loc;
 }
+
+public String getVstrtyp() {
+	return vstrtyp;
+}
+public void setVstrtyp(String vstrtyp) {
+	this.vstrtyp = vstrtyp;
+}
+public String getTitle() {
+	return title;
+}
+public void setTitle(String title) {
+	this.title = title;
+}
+public String getPov() {
+	return pov;
+}
+public void setPov(String pov) {
+	this.pov = pov;
+}
+public String getVcol() {
+	return vcol;
+}
+public void setVcol(String vcol) {
+	this.vcol = vcol;
+}
+public String getText1() {
+	return text1;
+}
+public void setText1(String text1) {
+	this.text1 = text1;
+}
+
 
 }
