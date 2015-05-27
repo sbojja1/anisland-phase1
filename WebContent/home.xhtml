@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:p="http://primefaces.org/ui">
+   <h:head>
+ 		
+   </h:head>
+   <h:body> 
+   <h2>h:validateLength Example</h2>
+   <h:form>
+    
+ <p:panelGrid>
+    	<div class="ui-grid ui-grid-responsive">
+    		<!-- Visitor Type -->
+    		<div class="ui-grid-row">
+    		 <div class="ui-grid-col-3" align="left"> <h:outputLabel for="vstrtyp" value="Visitor Type:" style="font-weight:bold" />
+    		  </div>
+    		  <div class="ui-grid-col-2">
+            					<p:selectOneMenu id="vstrtyp">
+                						<f:selectItem itemLabel="Personal" itemValue="PER" noSelectionOption="true" />
+                						<f:selectItem itemLabel="Official" itemValue="OFC" noSelectionOption="true" />
+                						<f:selectItem itemLabel="Confidential" itemValue="CON" noSelectionOption="true" />
+           						</p:selectOneMenu>	 
+            			 </div>
+              <div class="ui-grid-col-1"/>
+    		  <div class="ui-grid-col-1"><p:message for="vstrtyp" display="Icon" /></div>
+    		  <div class="ui-grid-col-6"></div> 
+    		</div>
+    	
+    	<!-- Company Name -->
+    	
+    		<div class="ui-grid-row">
+    		  
+    		  <div class="ui-grid-col-3" align="left"> <h:outputLabel for="cmpny" value="Company Name:" style="font-weight:bold" />
+    		  </div>
+    		  <div class="ui-grid-col-2">
+            					<p:inputText id="cmpny" value="#{userData.cmpny}">
+        							<f:validateLength minimum="10" />
+        							<p:ajax execute="currentInput" update="company" event="blur"/>
+        						</p:inputText>
+             </div>
+              <div class="ui-grid-col-1"/>
+    		  <div class="ui-grid-col-1"><p:message for="cmpny" id="company" display="icon" /></div>
+    		  <div class="ui-grid-col-5"></div> 
+    	</div>
+    	</div>
+    	
+    	
+    	<!-- Camera -->
+    	
+    	<div class="ui-grid-row">
+    		  
+    		  <div class="ui-grid-col-3" align="left"><h:outputLabel for="pphoto" value="Persons Photo:" style="font-weight:bold" />
+    		  </div>
+    		  <div class="ui-grid-col-2">
+		    		  <p:outputPanel id="photo">
+		            		<p:graphicImage name="#{photoCamView.filename}.jpeg" rendered="#{not empty photoCamView.filename}"/>
+		        	  </p:outputPanel>
+            					
+             </div>
+    		  <div class="ui-grid-col-1"><p:commandButton type="button" value="Capture" onclick="PF('pc').capture()"/></div>
+    		  <div class="ui-grid-col-6" align="center"><p:photoCam widgetVar="pc" listener="#{photoCamView.oncapture}" update="photo" /></div> 
+    	</div>
+    	
+    	<br />
+    	
+    	
+    	<!-- Title Drop down -->
+    	
+    	<div class="ui-grid-row">
+    		  
+    		  <div class="ui-grid-col-3" align="left"> <h:outputLabel for="title" value="Title:*" style="font-weight:bold" /></div>
+    		  <div class="ui-grid-col-2">
+    		  			<p:selectOneMenu id="title">
+                					<f:selectItem itemLabel="Mr" itemValue="Mr" noSelectionOption="true" />
+                					<f:selectItem itemLabel="Mrs" itemValue="Mrs" noSelectionOption="true" />
+                					<f:selectItem itemLabel="Miss" itemValue="Miss" noSelectionOption="true" />           					   
+            	    	</p:selectOneMenu>            					
+             </div>
+             <div class="ui-grid-col-1"></div>
+    		  <div class="ui-grid-col-1"><p:message for="title" display="title" /></div>
+    		  <div class="ui-grid-col-5"></div> 
+    	</div>
+    	
+    	
+    	
+    	
+    	<!-- First Name -->
+    		<div class="ui-grid-row">
+		    		  <div class="ui-grid-col-3" align="left"><h:outputLabel for="fnm" value="First Name:*" style="font-weight:bold" /></div>
+		    		  <div class="ui-grid-col-2">
+		    		  			<p:inputText id="fnm" value="#{userData.fnm}" required ="true">
+		        						<f:validateLength minimum="4" />
+		        						<p:ajax execute="currentInput" update="firstname" event="keyup" process="@this" />
+		        					</p:inputText>          					
+		             </div>
+		             <div class="ui-grid-col-1"></div>
+		    		  <div class="ui-grid-col-1"><p:message for="fnm" id="firstname" display="icon" /></div>
+		    		  
+		    		  <div class="ui-grid-col-5"></div> 
+    		</div>
+    		
+    	
+    	<!--  last name -->
+    		
+    		
+    		<div class="ui-grid-row">
+		    		  <div class="ui-grid-col-3" align="left"><h:outputLabel for="lnm" value="Last Name:*" style="font-weight:bold" /></div>
+		    		  <div class="ui-grid-col-2">
+		    		  			<p:inputText id="lnm" value="#{userData.lnm}" required ="true">
+        							<f:validateLength minimum="3" />
+        							<p:ajax execute="currentInput" update="lastname" event="blur" process="@this"/>
+        						</p:inputText>    					
+		             </div>
+		    		  <div class="ui-grid-col-2"><p:message for="lnm" id="lastname" display="icon"/></div>
+		    		  <div class="ui-grid-col-1"></div>
+		    		  <div class="ui-grid-col-6"></div> 
+    		</div>
+    		
+    	<!-- Telephone Number -->
+    	
+    		
+    	  <div class="ui-grid-row">
+		    		  <div class="ui-grid-col-3" align="left"><h:outputLabel for="tel" value="Telephone:*" style="font-weight:bold" /></div>
+		    		  <div class="ui-grid-col-2">
+		    		  			<p:inputMask id="phoneExt" value="#{userData.phoneExt}" mask="(999) 999-9999? x99999" required="true"> 
+		    		  			<f:validateLength minimum="10" />
+		    		  			<p:ajax execute="currentInput" update="telephone" event="blur" process="@this"/>
+		    		  			</p:inputMask>					
+		             </div>
+		    		  <div class="ui-grid-col-2"><p:message for="phoneExt" id="telephone" display="error"/></div>
+		    		  <div class="ui-grid-col-1"></div>
+		    		  <div class="ui-grid-col-6"></div> 
+    		</div>
+    		
+    		
+    	<!-- Mobile Number  -->
+    		<div class="ui-grid-row">
+		    		  <div class="ui-grid-col-3" align="left"><h:outputLabel for="mbl" value="Mobile:" style="font-weight:bold" /></div>
+		    		  <div class="ui-grid-col-2">
+		    		  			<p:inputMask id="mbl" value="#{userData.mbl}" mask="(999) 999-9999" />
+        							
+        						 					
+		             </div>
+		    		  <div class="ui-grid-col-2"></div>
+		    		  <div class="ui-grid-col-1"></div>
+		    		  <div class="ui-grid-col-6"></div> 
+    		</div>
+    		
+    		
+    	<!-- Fax number-->	
+    		<div class="ui-grid-row">
+		    		  <div class="ui-grid-col-3" align="left"><h:outputLabel for="fax" value="Fax:" style="font-weight:bold" /></div>
+		    		  <div class="ui-grid-col-2">
+		    		  			<p:inputMask id="fax" value="#{userData.fax}" mask="(999) 999-9999? x99999"/>				
+		             </div>
+		    		  <div class="ui-grid-col-2"></div>
+		    		  <div class="ui-grid-col-1"></div>
+		    		  <div class="ui-grid-col-6"></div> 
+    		</div>
+    	
+    	
+    	<!-- Email Id -->
+    		<div class="ui-grid-row">
+		    		  <div class="ui-grid-col-3" align="left"><h:outputLabel for="email" value="Email :*" style="font-weight:bold" /></div>
+		    		  <div class="ui-grid-col-2">
+		    		  			<p:inputText id="email" value="#{userData.email}">
+        							<f:validateLength minimum="5" />
+        							<p:ajax update="Email" event="blur"/>
+       						 	</p:inputText>				
+		             </div>
+		    		  <div class="ui-grid-col-2"><p:message for="email" id="Email" display="email"/></div>
+		    		  <div class="ui-grid-col-1"></div>
+		    		  <div class="ui-grid-col-6"></div> 
+    		</div>
+    		
+    	<!-- C/O detail -->	
+    		
+    		<div class="ui-grid-row">
+		    		  <div class="ui-grid-col-3" align="left"><h:outputLabel for="co" value="C/O:*" style="font-weight:bold" /></div>
+		    		  <div class="ui-grid-col-2">
+		    		  			<p:inputText id="co" value="#{userData.co}">
+        							<f:validateLength minimum="3" />
+        							<p:ajax execute="currentInput" update="CO" event="keyup" process="@this" />
+        				    	</p:inputText>				
+		             </div>
+		    		  <div class="ui-grid-col-2"><p:message for="co" id="CO" display="icon"/></div>
+		    		  <div class="ui-grid-col-1"></div>
+		    		  <div class="ui-grid-col-6"></div> 
+    		</div>
+    		
+    		
+    	<!-- House Detail -->
+    	
+    		<div class="ui-grid-row">
+		    		  <div class="ui-grid-col-3" align="left"><h:outputLabel for="hno" value="House No:*" style="font-weight:bold" /></div>
+		    		  <div class="ui-grid-col-2">
+		    		  			<p:inputText id="hno" value="#{userData.hno}">
+        							<f:validateLength minimum="5" />
+        							<p:ajax execute="currentInput" update="house" event="keyup" process="@this" />
+        				    	</p:inputText>				
+		             </div>
+		    		  <div class="ui-grid-col-2"><p:message for="hno" id="house" display="icon"/></div>
+		    		  <div class="ui-grid-col-1"></div>
+		    		  <div class="ui-grid-col-6"></div> 
+    		</div>	
+    		
+     <!-- Street Name -->
+    		<div class="ui-grid-row">
+		    		  <div class="ui-grid-col-3" align="left"><h:outputLabel for="str1" value="Street 1:*" style="font-weight:bold" /></div>
+		    		  <div class="ui-grid-col-2">
+		    		  			<p:inputText id="str1" value="#{userData.str1}">
+        							<f:validateLength minimum="4" />
+        							<p:ajax execute="currentInput" update="street1" event="keyup" process="@this" />
+        				    	</p:inputText>				
+		             </div>
+		    		  <div class="ui-grid-col-2"><p:message for="str1" id="street1" display="icon"/></div>
+		    		  <div class="ui-grid-col-1"></div>
+		    		  <div class="ui-grid-col-6"></div> 
+    		</div>	
+    		
+    <!-- Street 2 -->
+    		
+    		<div class="ui-grid-row">
+		    		  <div class="ui-grid-col-3" align="left"><h:outputLabel for="str2" value="Street 2:" style="font-weight:bold" /></div>
+		    		  <div class="ui-grid-col-2">
+		    		  			<p:inputText id="str2" value="#{userData.str2}">
+        							
+        				    	</p:inputText>				
+		             </div>
+		    		  <div class="ui-grid-col-2"><p:message for="str2" display="str2"/></div>
+		    		  <div class="ui-grid-col-1"></div>
+		    		  <div class="ui-grid-col-6"></div> 
+    		</div>	
+    		
+    <!--  Street 3 -->
+    		
+    		<div class="ui-grid-row">
+		    		  <div class="ui-grid-col-3" align="left"><h:outputLabel for="str3" value="Street 3:" style="font-weight:bold" /></div>
+		    		  <div class="ui-grid-col-2">
+		    		  			<p:inputText id="str3" value="#{userData.str3}">
+        							
+        				    	</p:inputText>				
+		             </div>
+		    		  <div class="ui-grid-col-2"><p:message for="str3" display="str3"/></div>
+		    		  <div class="ui-grid-col-1"></div>
+		    		  <div class="ui-grid-col-6"></div> 
+    		</div>	
+    		
+    <!-- Street 4 -->
+    		<div class="ui-grid-row">
+		    		  <div class="ui-grid-col-3" align="left"><h:outputLabel for="str4" value="Street 4:" style="font-weight:bold" /></div>
+		    		  <div class="ui-grid-col-2">
+		    		  			<p:inputText id="str4" value="#{userData.str4}">
+		    		  			
+        							
+        				    	</p:inputText>				
+		             </div>
+		    		  <div class="ui-grid-col-2"><p:message for="str4" display="str4"/></div>
+		    		  <div class="ui-grid-col-1"></div>
+		    		  <div class="ui-grid-col-6"></div> 
+    		</div>	
+    
+    <!-- District Detail -->
+    		
+    		<div class="ui-grid-row">
+		    		  <div class="ui-grid-col-3" align="left"><h:outputLabel for="dstct" value="District:" style="font-weight:bold" /></div>
+		    		  <div class="ui-grid-col-2">
+		    		  			<p:inputText id="dstct" value="#{userData.dstct}">
+        							
+        						</p:inputText> 				
+		             </div>
+		    		  <div class="ui-grid-col-2"><p:message for="dstct" display="dstct"/></div>
+		    		  <div class="ui-grid-col-1"></div>
+		    		  <div class="ui-grid-col-6"></div> 
+    		</div>	
+    		
+    		
+    <!-- City -->
+    		
+    		<div class="ui-grid-row">
+		    		  <div class="ui-grid-col-3" align="left"><h:outputLabel for="cty" value="City:*" style="font-weight:bold" /></div>
+		    		  <div class="ui-grid-col-2">
+		    		  			<p:inputText id="cty" value="#{userData.cty}">
+        							<f:validateLength minimum="3" />
+        							<p:ajax execute="currentInput" update="City" event="keyup" process="@this"/>
+        						</p:inputText> 				
+		             </div>
+		    		  <div class="ui-grid-col-2"><p:message for="cty" id="City" display="icon"/></div>
+		    		  <div class="ui-grid-col-1"></div>
+		    		  <div class="ui-grid-col-6"></div> 
+    		</div>	
+    
+   <!-- Postal Code -->
+   
+    		<div class="ui-grid-row">
+		    		  <div class="ui-grid-col-3" align="left"><h:outputLabel for="pcode" value="Postal code:*" style="font-weight:bold" /></div>
+		    		  <div class="ui-grid-col-2">
+		    		  			<p:inputText id="pcode" value="#{userData.pcode}">
+        							<f:validateLength minimum="5" maximum="5"/>
+        							<p:ajax execute="currentInput" update="code" event="keyup" process="@this" />
+        						</p:inputText> 				
+		             </div>
+		    		  <div class="ui-grid-col-2"><p:message for="pcode" id="code" display="icon"/></div>
+		    		  <div class="ui-grid-col-1"></div>
+		    		  <div class="ui-grid-col-6"></div> 
+    		</div>	
+    		
+   <!-- Region -->
+   
+   <div class="ui-grid-row">
+		    		  <div class="ui-grid-col-3" align="left"><h:outputLabel for="rgn" value="Region:" style="font-weight:bold" /></div>
+		    		  <div class="ui-grid-col-2">
+		    		  			<p:inputText id="rgn" value="#{userData.rgn}">
+        							
+       						    </p:inputText> 				
+		             </div>
+		    		  <div class="ui-grid-col-2"><p:message for="rgn" display="rgn"/></div>
+		    		  <div class="ui-grid-col-1"></div>
+		    		  <div class="ui-grid-col-6"></div> 
+    		</div>	
+    		
+   <!--  Country -->
+    		
+    		<div class="ui-grid-row">
+		    		  <div class="ui-grid-col-3" align="left"><h:outputLabel for="cntry" value="Country:*" style="font-weight:bold" /></div>
+		    		  <div class="ui-grid-col-2">
+		    		  			<p:inputText id="cntry" value="#{userData.cntry}">
+        							<f:validateLength minimum="2" />
+        							<p:ajax execute="currentInput" update="country" event="keyup" process="@this" />
+       						    </p:inputText> 				
+		             </div>
+		    		  <div class="ui-grid-col-2"><p:message for="cntry" id="country" display="icon"/></div>
+		    		  <div class="ui-grid-col-1"></div>
+		    		  <div class="ui-grid-col-6"></div> 
+    		</div>	
+    				<br />
+    				
+    				
+    				
+ 			<!-- Toolbar Panel for personal and Timming Details -->
+ 							  <p:toolbar>
+	   								<p:toolbarGroup>
+	      								 <p:outputLabel value="Personnel and Timming Details" style="text-align:center"/>
+	   								</p:toolbarGroup>
+							  </p:toolbar> 	<br />		
+    	
+    	
+    	
+    	  <!-- Personnel Information -->
+    		
+    			<div class="ui-grid-row">
+		    		  <div class="ui-grid-col-3" align="left"><h:outputLabel for="pov" value="Purpose of Visit:*" style="font-weight:bold" /></div>
+		    		  <div class="ui-grid-col-2">
+		    		  			<p:selectOneMenu id="pov">
+                					<f:selectItem itemLabel="Personal" itemValue="POC" noSelectionOption="true" />
+                					<f:selectItem itemLabel="OFFICIAL" itemValue="OFC" noSelectionOption="true" />
+                					<f:selectItem itemLabel="COMPANY" itemValue="COM" noSelectionOption="true" />           					   
+            					</p:selectOneMenu>			
+		             </div>
+		    		  <div class="ui-grid-col-2"><p:message for="pov" display="pov"/></div>
+		    		  <div class="ui-grid-col-1"></div>
+		    		  <div class="ui-grid-col-6"></div> 
+    	    	</div>				
+    		
+    		
+    		
+    		<!-- Meeting Person name -->
+    		
+    		<div class="ui-grid-row">
+		    		  <div class="ui-grid-col-3" align="left">
+		    		  <h:outputLabel for="mpnm" value="Meeting Person Name:*" style="font-weight:bold" />
+		    		  </div>
+		    		  <div class="ui-grid-col-2">
+		    		  			<p:inputText id="mpnm" value="#{userData.mpnm}">
+        						<f:validateLength minimum="4" />
+        						<p:ajax execute="currentInput" update="name1" event="keyup" process="@this"/>
+        					</p:inputText>  				
+		             </div>
+		    		  <div class="ui-grid-col-2"><p:message for="mpnm" id="name1" display="icon"/></div>
+		    		  <div class="ui-grid-col-1"></div>
+		    		  <div class="ui-grid-col-6"></div> 
+    		</div>	
+    		
+    		<!--  Department Details  -->
+    		
+    		<div class="ui-grid-row">
+		    		  <div class="ui-grid-col-3" align="left">
+		    		  <h:outputLabel for="dept" value="Department:*" style="font-weight:bold" />
+		    		  </div>
+		    		  <div class="ui-grid-col-2">
+		    		  		<p:selectOneMenu id="dept" value="#{userData.dept}">
+					               <f:selectItem  itemValue="Administration" noSelectionOption="true" />
+					                <f:selectItems value="Administration" />
+            				</p:selectOneMenu>  				
+		             </div>
+		    		  <div class="ui-grid-col-2"><p:message for="dept" display="dept"/></div>
+		    		  <div class="ui-grid-col-1"></div>
+		    		  <div class="ui-grid-col-6"></div> 
+    		</div>	
+    		
+    		<!-- Room Number,Floor,Bldg  -->
+    		
+    		
+    		<div class="ui-grid-row">
+		    		  <div class="ui-grid-col-3" align="left"><h:outputLabel for="rmno" value="Room Number:" style="font-weight:bold"/></div>
+		    		  <div class="ui-grid-col-2">
+					    		 	    <p:inputText id="rmno" value="#{userData.rmno}">
+			        						
+			        					</p:inputText>
+			          </div>
+		    		  <div class="ui-grid-col-2"><p:message for="rmno" display="rmno"/></div>
+		    		  <div class="ui-grid-col-1"></div>
+		    		  <div class="ui-grid-col-6"></div>
+		   </div>	
+    		
+    		         <!-- Floor -->
+		    <div class="ui-grid-row">		  
+		    		  <div class="ui-grid-col-3" align="left"><h:outputLabel for="flr" value="Floor:" style="font-weight:bold"/></div>
+		    		  <div class="ui-grid-col-2">
+					    		 	    <p:inputText id="flr" value="#{userData.flr}">
+			        						
+			        					</p:inputText>
+			          </div>
+		    		  <div class="ui-grid-col-2"><p:message for="flr" display="flr"/></div>
+		    		   <div class="ui-grid-col-1"></div>
+		    		  <div class="ui-grid-col-6"></div>
+		    		  
+		    </div>
+		    	<!-- Building -->	 
+		    	 
+		    <div class="ui-grid-row"> 
+		    		  <div class="ui-grid-col-3" align="left"><h:outputLabel for="bldg" value="Bldg:" style="font-weight:bold"/></div>
+		    		  <div class="ui-grid-col-2">
+					    		 	    <p:inputText id="bldg" value="#{userData.bldg}">
+			        						
+			        					</p:inputText>
+			          </div>
+		    		  <div class="ui-grid-col-2"><p:message for="bldg" display="bldg"/></div>
+    				     <div class="ui-grid-col-1"></div>
+		    		  <div class="ui-grid-col-6"></div>
+    		</div><br/>
+    		
+    		<!-- Time and Date In of the Visitor -->
+    		
+		   <div class="ui-grid-row"> 
+		  			    <div class="ui-grid-col-2"  align="left">
+							<h:outputLabel for="datein" value="Date In:*" style="font-weight:bold" /> 		
+						</div>
+						<div class="ui-grid-col-1">
+            				<p:calendar id="datein" value="#{userData.datein}" required = "true"/>	
+            			</div>
+            			<div class="ui-grid-col-2">
+            			<p:message for="datein" display="datein"/>
+            			</div>
+            			<div class="ui-grid-col-2"  align="left">
+							<h:outputLabel for="timein" value="Time In:*" style="font-weight:bold" /> 		
+						</div>
+						<div class="ui-grid-col-1">
+		   					<p:calendar id="timein" value="#{userData.timein}" required = "true" pattern="HH:mm a" timeOnly="true" />	
+		   		         </div>
+		   				<div class="ui-grid-col-2">
+		   					<p:message for="timein" display="timein"/>
+		   		         </div>
+		   </div>
+		   
+		   <!-- Expected Time and Date out -->
+		   
+		   <div class="ui-grid-row"> 
+		  			    <div class="ui-grid-col-2"  align="left">
+							<h:outputLabel for="edateout" value="Expected Date Out:*" style="font-weight:bold" /> 		
+						</div>
+						<div class="ui-grid-col-1">
+            				<p:calendar id="edateout" value="#{userData.edateout}" required = "true" />	
+            			</div>
+            			<div class="ui-grid-col-2">
+            			<p:message for="edateout" display="edateout"/>
+            			</div>
+            			<div class="ui-grid-col-2"  align="left">
+							<h:outputLabel for="etimeout" value="Expected Time Out:*" style="font-weight:bold" /> 		
+						</div>
+						<div class="ui-grid-col-1">
+		   					<p:calendar id="etimeout" value="#{userData.etimeout}" pattern="HH:mm a" timeOnly="true" />	
+		   		         </div>
+		   				<div class="ui-grid-col-2">
+		   					<p:message for="etimeout" display="etimeout" required = "true"/>
+		   		         </div>
+		   </div>
+		   
+		   <!-- Actual Time and Date out  -->
+		   
+		   	 <div class="ui-grid-row"> 
+		  			    <div class="ui-grid-col-2"  align="left">
+							<h:outputLabel for="dateout" value="Date Out:" style="font-weight:bold" /> 		
+						</div>
+						<div class="ui-grid-col-1">
+            				<p:calendar id="dateout" value="#{userData.dateout}" />	
+            			</div>
+            			<div class="ui-grid-col-2">
+            			<p:message for="dateout" display="dateout"/>
+            			</div>
+            			<div class="ui-grid-col-2"  align="left">
+							<h:outputLabel for="timeout" value="Time Out:" style="font-weight:bold" /> 		
+						</div>
+						<div class="ui-grid-col-1">
+		   					<p:calendar id="timeout" value="#{userData.timeout}" pattern="HH:mm a" timeOnly="true" />	
+		   		         </div>
+		   				<div class="ui-grid-col-2">
+		   					<p:message for="timeout" display="timeout"/>
+		   		         </div>
+		   </div><br />
+		   
+		   <!-- Visitor Vehicle  Details Panel -->
+		  
+    						  <p:toolbar>
+	   								<p:toolbarGroup>
+	      								 <p:outputLabel value="Details of Visitor Vehicle" style="text-align:center"/>
+	   								</p:toolbarGroup>
+							  </p:toolbar> 	<br />	
+    		
+    		<!-- Vehicle Category and Vehicle Make -->
+    		
+    		<div class="ui-grid-row">
+					 
+            			<div class="ui-grid-col-2"  align="left">
+            				<h:outputLabel for="vcat" value="Vehicle Category:" style="font-weight:bold" />	
+						</div>
+						<div class="ui-grid-col-1" align="left">
+            				<p:selectOneMenu id="vcat" value="#{userData.vcat}" style="font-weight:bold">
+				                <f:selectItem itemLabel="SUV" itemValue="SUV" noSelectionOption="true" />
+				                <f:selectItems value="Official" />
+            				</p:selectOneMenu>
+            			</div>
+            			<div class="ui-grid-col-1"><p:message for="vcat" display="vcat"/></div>
+            			
+            			
+            			<div class="ui-grid-col-2"  align="left">
+            			<h:outputLabel for="vmk" value="Vehicle Manufacturer: " style="font-weight:bold" />		
+						</div>
+						<div class="ui-grid-col-1">
+            				<p:selectOneMenu id="vmk" value="#{userData.vmk}">
+				                <f:selectItem itemLabel="DODGE" itemValue="DODGE" noSelectionOption="true" />
+				                <f:selectItems value="DODGE" />
+           					 </p:selectOneMenu>
+            			</div>
+        				<div class="ui-grid-col-1"><p:message for="vmk" display="vmk"/></div>
+          </div>
+          
+          <!-- Vechicle Model and Color -->
+        		
+    		<div class="ui-grid-row">
+					 
+            			<div class="ui-grid-col-2"  align="left">
+            				<h:outputLabel for="vmod" value="Vehicel Model:" style="font-weight:bold" />
+						</div>
+						<div class="ui-grid-col-1" align="left">
+            				<p:selectOneMenu id="vmod" value="#{userData.vmod}" style="font-weight:bold">
+					                <f:selectItem itemLabel="VIPER" itemValue="VIPER" noSelectionOption="true" />
+					                <f:selectItems value="VIPER" />
+            				 </p:selectOneMenu>
+            			</div>
+            			<div class="ui-grid-col-1"><p:message for="vmod" display="vmod"/></div>
+            			
+            			
+            			<div class="ui-grid-col-2"  align="left">
+            			<h:outputLabel for="vcol" value="Vehicel Color:" style="font-weight:bold" />		
+						</div>
+						<div class="ui-grid-col-1">
+            				<p:selectOneMenu id="vcol" value="Black" style="font-weight:bold">
+				                <f:selectItem itemLabel="Black" itemValue="Black" noSelectionOption="true" />
+				                <f:selectItems value="Black" />
+            		         </p:selectOneMenu>
+            			</div>
+        				<div class="ui-grid-col-1"><p:message for="vcol" display="vcol"/></div>
+          </div>
+    	
+
+    	<!-- Vehicle No, Parking Area and Location -->	
+    			<div class="ui-grid-row"> 
+		  			    <div class="ui-grid-col-2"  align="left">
+							<h:outputLabel for="vhno" value="Vehicle No:" style="font-weight:bold" /> 		
+						</div>
+						<div class="ui-grid-col-1">
+            				<p:inputText id="vhno" value="#{userData.vhno}">
+        						
+        					</p:inputText>	
+            			</div>
+            			<div class="ui-grid-col-1">
+            			<p:message for="vhno" display="vhno"/>
+            			</div>
+            			
+            			<div class="ui-grid-col-2"  align="left">
+							<h:outputLabel for="parea" value="Parking Area:" style="font-weight:bold" /> 		
+						</div>
+						<div class="ui-grid-col-1">
+		   					<p:calendar id="parea" value="#{userData.parea}" />	
+		   		         </div>
+		   				<div class="ui-grid-col-1">
+		   					<p:message for="parea" display="parea"/>
+		   		         </div>
+		   		         
+		   		         <div class="ui-grid-col-2"  align="left">
+							<h:outputLabel for="loc" value="Location:" style="font-weight:bold" /> 		
+						</div>
+						<div class="ui-grid-col-1">
+		   					<p:calendar id="loc" value="#{userData.loc}" />	
+		   		         </div>
+		   				<div class="ui-grid-col-1">
+		   					<p:message for="loc" display="loc"/>
+		   		         </div>
+		  	 </div>
+    <br/><br />
+    <div class="ui-grid-row">
+     <div class="ui-grid-col-4"  align="center"></div>
+     <div class="ui-grid-col-1"> <p:commandButton value="Submit" action="disPlay" /></div>
+     <div class="ui-grid-col-1"> <p:commandButton value="Reset" action="disPlay" /></div>
+     <div class="ui-grid-col-2"  align="center"></div>
+     <div class="ui-grid-col-4"  align="center"></div>
+    </div> 
+    
+ 
+    
+  
+    	
+    
+    	
+    	</p:panelGrid>
+    	
+    	
+     
+      <p:commandButton value="submit" action="result" />
+    
+   </h:form>   
+</h:body>
+</html>

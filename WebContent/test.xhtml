@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:p="http://primefaces.org/ui">
+   <h:head>
+ 		
+   </h:head>
+   <h:body> 
+   <h2>h:validateLength Example</h2>
+   <h:form>
+    <p:panel id="panel" header="New User">
+  <p:inputText id="name" value="#{user.name}" label="name" >
+    <f:validateLength minimum="7" />
+    <p:ajax execute="currentInput" update="msgLastname" event="blur" process="@this"/>
+</p:inputText>
+
+<p:message for="name" id="msgLastname" display="icon" style="color:red" />
+
+<p:inputText id="lastname" value="#{user.lastname}">
+    <f:validateLength minimum="5"/>
+    <p:ajax execute="currentInput" update="msg" event="blur" process="@this"/>
+</p:inputText>
+
+<p:message for="lastname" id="msg" display="icon"/>
+    
+     
+      <p:commandButton value="submit" action="result" />
+    </p:panel>
+   </h:form>   
+</h:body>
+</html>
