@@ -52,7 +52,7 @@
     	
     	<div class="ui-grid-row">
     		  
-    		  <div class="ui-grid-col-3" align="left"><h:outputLabel for="pphoto" value="Persons Photo:" style="font-weight:bold" />
+    		  <div class="ui-grid-col-3" align="left"><h:outputLabel for="photo" value="Persons Photo:" style="font-weight:bold" />
     		  </div>
     		  <div class="ui-grid-col-2">
 		    		  <p:outputPanel id="photo">
@@ -117,7 +117,7 @@
     	
     		
     	  <div class="ui-grid-row">
-		    		  <div class="ui-grid-col-3" align="left"><h:outputLabel for="tel" value="Telephone:*" style="font-weight:bold" /></div>
+		    		  <div class="ui-grid-col-3" align="left"><h:outputLabel for="phoneExt" value="Telephone:*" style="font-weight:bold" /></div>
 		    		  <div class="ui-grid-col-2">
 		    		  			<p:inputMask id="phoneExt" value="#{userData.phoneExt}" mask="(999) 999-9999? x99999" validatorMessage="Telephone Number is required" > 
 		    		  			<f:validateLength minimum="10" />
@@ -586,17 +586,7 @@
 		   		         </div>
 		  	 </div>
     <br/><br />
-<!-- 			    <div class="ui-grid-row"> -->
-<!-- 			        <div class="ui-grid-col-6"></div> -->
-<!-- 			        <div class="ui-grid-col-1"><p:commandButton value="submit" action="result" /></div> -->
-<!-- 			   	    <div class="ui-grid-col-1"><p:commandButton value="Reset" /></div> -->
-<!-- 			    </div>  -->
-    
- 
-  
-  
-  				
-  				
+		
     	</p:panelGrid>
     	
     	
@@ -604,10 +594,6 @@
      
     
    </h:form>   
-   
-   
-
-
 
 </h:body>
 </html>
